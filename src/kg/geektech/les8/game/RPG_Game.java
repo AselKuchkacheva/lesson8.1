@@ -5,15 +5,18 @@ import kg.geektech.les8.players.*;
 public class RPG_Game {
 
     public static void startGame(){
-        Boss boss = new Boss(700, 50);
+        Boss boss = new Boss(1300, 50);
 
-        Warrior warrior = new Warrior(260, 20);
-        Medic doctor = new Medic(220, 0, 20);
+        Warrior warrior = new Warrior(300, 20);
+        Medic doctor = new Medic(150, 0, 20);
         Magic magic = new Magic(240, 15);
         Medic yongMedic = new Medic(280, 20, 10);
         Golem golem = new Golem(250, 10);
+        Thor thor = new Thor(250, 20);
+        Tank tank = new Tank(350, 10);
+        Witcher witcher = new Witcher(300, 0);
 
-        Hero[] heroes = {warrior, doctor, magic, yongMedic, golem};
+        Hero[] heroes = {warrior, doctor, magic, yongMedic, golem, thor, tank, witcher};
 
         printStatistics(boss, heroes);
         int roundNumber = 0;
@@ -28,10 +31,11 @@ public class RPG_Game {
     }
 
     private static void round (Boss boss, Hero[] heroes){
+        applySuperAbilities(boss, heroes);
         if (boss.getHealth() > 0){
         bossHits(boss, heroes);}
         heroesHits(boss, heroes);
-        applySuperAbilities(boss, heroes);
+      //  applySuperAbilities(boss, heroes);
         printStatistics(boss, heroes);
 
     }
@@ -66,12 +70,23 @@ public class RPG_Game {
         System.out.println("____________________");
     }
 
-    private static void bossHits (Boss boss,Hero[] heroes){
+    private static void applySuperAbilities (Boss boss,Hero[] heroes){
         for (int i = 0; i < heroes.length; i++) {
-            if (heroes[i].getHealth() > 0){
-                heroes[i].setHealth(heroes[i].getHealth() - boss.getDamage());
+            if (heroes[i].getHealth() > 0 ) {
+                heroes[i].applySuperAbility(boss, heroes);
             }
+        }
 
+    }
+
+    private static void bossHits (Boss boss,Hero[] heroes){
+        if (!Thor.bossBlock) {
+            for (int i = 0; i < heroes.length; i++) {
+                if (heroes[i].getHealth() > 0) {
+                    heroes[i].setHealth(heroes[i].getHealth() - boss.getDamage());
+                }
+
+            }
         }
 
     }
@@ -85,14 +100,7 @@ public class RPG_Game {
 
     }
 
-    private static void applySuperAbilities (Boss boss,Hero[] heroes){
-        for (int i = 0; i < heroes.length; i++) {
-            if (heroes[i].getHealth() > 0 ) {
-               heroes[i].applySuperAbility(boss, heroes);
-            }
-        }
 
-    }
 
 
 }

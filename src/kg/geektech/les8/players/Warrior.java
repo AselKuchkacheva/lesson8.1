@@ -9,20 +9,16 @@ public class Warrior extends Hero {
         super(health, damage, SuperAbility.CRITICAL_DAMAGE);
     }
 
-    @Override
+   @Override
     public void applySuperAbility(Boss boss, Hero[] heroes) {
 
-     //  for (int i = 0; i < heroes.length; i++) {
-            Random r = new Random();
-            int nKol = r.nextInt(3) + 2; //2,3.4
-            if (this.getHealth() > 0) {
-               // this.setDamage(this.getDamage() * nKol);
-               boss.setHealth(boss.getHealth() - (this.getDamage()*nKol));
-            //}
+
+           Random r = new Random();
+            int nKol = r.nextInt(3) + 2; //2, 3, 4
+           // if (this.getHealth() > 0) {
+            boss.setHealth(boss.getHealth() - (this.getDamage()*nKol));
             System.out.println(nKol + " Warrior"); //для себя
-
-
-        }
+       // }
     }
 
 

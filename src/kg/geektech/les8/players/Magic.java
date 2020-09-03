@@ -3,7 +3,7 @@ package kg.geektech.les8.players;
 import java.util.Random;
 
 //Magic должен увеличивать атаку каждого героя после каждого раунда
-//на n-ное количествоMagic должен увеличивать атаку каждого героя
+//на n-ное количество Magic должен увеличивать атаку каждого героя
 
 public class Magic extends Hero {
 
